@@ -44,6 +44,12 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
     waitConfirmations: network.config.blockConfirmations || 1,
   });
 
+  // !InvalidConsumer()error without adding raffle as a consumer of the Mock. (issue doesn't occur in the original)
+
+  if (chainId == 31337) {
+    await vrfCoordinatorV2Mock.addConsumer(subscriptionId, raffle.address);
+  }
+
   // Verify the deployment
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     log("Verifying...");
