@@ -13,6 +13,7 @@ const GOERLI_RPC_URL = process.env.GOERLI_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const ETHERSCAN_API_KEY = process.env.ETHERSCAN_API_KEY;
 const REPORT_GAS = process.env.REPORT_GAS || false;
+const COINMARKET_CAP_KEY = process.env.COINMARKET_CAP_KEY;
 
 module.exports = {
   defaultNetwork: "hardhat",
@@ -53,19 +54,19 @@ module.exports = {
     //   chainId: 137,
     // },
   },
-  // etherscan: {
-  //   // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
-  //   apiKey: {
-  //     goerli: ETHERSCAN_API_KEY,
-  //     polygon: POLYGONSCAN_API_KEY,
-  //   },
-  // },
+  etherscan: {
+    // yarn hardhat verify --network <NETWORK> <CONTRACT_ADDRESS> <CONSTRUCTOR_PARAMETERS>
+    apiKey: {
+      goerli: ETHERSCAN_API_KEY,
+      // polygon: POLYGONSCAN_API_KEY,
+    },
+  },
   gasReporter: {
     enabled: false,
     currency: "USD",
     outputFile: "gas-report.txt",
     noColors: true,
-    // coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    coinmarketcap: COINMARKET_CAP_KEY,
   },
   // contractSizer: {
   //   runOnCompile: false,

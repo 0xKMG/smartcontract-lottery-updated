@@ -2,6 +2,7 @@ const { network, ethers } = require("hardhat");
 const { networkConfig, developmentChains } = require("../helper-hardhat-config");
 
 const VRF_SUB_FUND_AMOUNT = ethers.utils.parseEther("2");
+const { verify } = require("../utils/verify");
 
 module.exports = async ({ getNamedAccounts, deployments }) => {
   const { deploy, log } = deployments;
@@ -53,7 +54,7 @@ module.exports = async ({ getNamedAccounts, deployments }) => {
   // Verify the deployment
   if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
     log("Verifying...");
-    await verify(raffle.address, arguments);
+    await verify(raffle.address, args);
   }
   log("Enter lottery with command:");
   const networkName = network.name == "hardhat" ? "localhost" : network.name;
